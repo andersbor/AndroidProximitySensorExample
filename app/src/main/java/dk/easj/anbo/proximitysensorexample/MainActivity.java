@@ -11,23 +11,29 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
     private SensorManager mSensorManager;
-    private Sensor mSensor;
+    private Sensor mProximity, mLight, mAcceleration;
     private TextView messageView;
-    private TextView censorView;
+    private TextView sensorView, sensorView2, sensorView3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         mSensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        mSensor = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
+        mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
+        mAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
         messageView = findViewById(R.id.messageView);
-        censorView = findViewById(R.id.censorView);
+        sensorView = findViewById(R.id.censorView);
+        sensorView2 = findViewById(R.id.censorView2);
+        sensorView3 = findViewById(R.id.censorView3);
     }
 
     protected void onResume() {
         super.onResume();
-        mSensorManager.registerListener(this, mSensor, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mProximity, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mLight, SensorManager.SENSOR_DELAY_NORMAL);
+        mSensorManager.registerListener(this, mAcceleration, SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     protected void onPause() {
@@ -37,8 +43,27 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onSensorChanged(SensorEvent event) {
-        String censorname = event.sensor.getName();
-        censorView.setText(censorname + " accuracy " + event.accuracy);
+        String sensorName = event.sensor.getName();
+        switch (event.sensor.getType()) {
+            case Sensor.TYPE_LIGHT:
+                float light = event.values[0];
+                Log.d("MINE", "Light " + light);
+                sensorView.setText(sensorName + " Light " + light);
+                break;
+            case Sensor.TYPE_PROXIMITY:
+                float distance_in_cm = event.values[0];
+                Log.d("MINE", "Proximity " + distance_in_cm + " cm");
+                sensorView2.setText(sensorName + " Proximity " + distance_in_cm);
+                break;
+            case Sensor.TYPE_ACCELEROMETER:
+                float x = event.values[0];
+                float y = event.values[1];
+                float z = event.values[2];
+                sensorView3.setText(sensorName + " Acceleration " + x + " " + y + " " + z);
+                Log.d("MINE", "Acceleration: " + x + " " + y + " " + z);
+                break;
+        }
+        /*
         // http://developer.android.com/guide/topics/sensors/sensors_position.html
         final float distanceInCentimeters = event.values[0];
         if (distanceInCentimeters == 0) {
@@ -49,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
             messageView.setText(message);
             Log.d("MINE", message);
         }
+        */
     }
 
     @Override
