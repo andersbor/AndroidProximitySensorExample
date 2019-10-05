@@ -10,6 +10,7 @@ import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
+    public static final String LOG_TAG = "MINE";
     private SensorManager mSensorManager;
     private Sensor mProximity, mLight, mAcceleration;
     private TextView messageView;
@@ -47,12 +48,12 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         switch (event.sensor.getType()) {
             case Sensor.TYPE_LIGHT:
                 float light = event.values[0];
-                Log.d("MINE", "Light " + light);
+                Log.d(LOG_TAG, "Light " + light);
                 sensorView.setText(sensorName + " Light " + light);
                 break;
             case Sensor.TYPE_PROXIMITY:
                 float distance_in_cm = event.values[0];
-                Log.d("MINE", "Proximity " + distance_in_cm + " cm");
+                Log.d(LOG_TAG, "Proximity " + distance_in_cm + " cm");
                 sensorView2.setText(sensorName + " Proximity " + distance_in_cm);
                 break;
             case Sensor.TYPE_ACCELEROMETER:
@@ -60,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
                 float y = event.values[1];
                 float z = event.values[2];
                 sensorView3.setText(sensorName + " Acceleration " + x + " " + y + " " + z);
-                Log.d("MINE", "Acceleration: " + x + " " + y + " " + z);
+                Log.d(LOG_TAG, "Acceleration: " + x + " " + y + " " + z);
                 break;
         }
         /*
