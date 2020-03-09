@@ -4,16 +4,17 @@ import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.support.v7.app.AppCompatActivity;
+
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity implements SensorEventListener {
-    public static final String LOG_TAG = "MINE";
+    private static final String LOG_TAG = "MINE";
     private SensorManager mSensorManager;
     private Sensor mProximity, mLight, mAcceleration;
-    private TextView messageView;
     private TextView sensorView, sensorView2, sensorView3;
 
     @Override
@@ -24,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
         mProximity = mSensorManager.getDefaultSensor(Sensor.TYPE_PROXIMITY);
         mLight = mSensorManager.getDefaultSensor(Sensor.TYPE_LIGHT);
         mAcceleration = mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER);
-        messageView = findViewById(R.id.messageView);
+        TextView messageView = findViewById(R.id.messageView);
         sensorView = findViewById(R.id.censorView);
         sensorView2 = findViewById(R.id.censorView2);
         sensorView3 = findViewById(R.id.censorView3);
@@ -80,6 +81,5 @@ public class MainActivity extends AppCompatActivity implements SensorEventListen
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-
     }
 }
