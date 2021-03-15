@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/ProximitySensorExample.iml" filepath="$PROJECT_DIR$/ProximitySensorExample.iml" group="ProximitySensorExample" />
-      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" group="ProximitySensorExample/app" />
+      <module fileurl="file://$PROJECT_DIR$/ProximitySensorExample.iml" filepath="$PROJECT_DIR$/ProximitySensorExample.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/ProximitySensorExample.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/ProximitySensorExample.app.iml" />
     </modules>
   </component>
 </project>
